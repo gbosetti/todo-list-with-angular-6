@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../model/Item';
+import { TodolistService } from './todolist.service';
 
 @Component({
   selector: 'app-todolist',
@@ -11,12 +12,7 @@ export class TodolistComponent implements OnInit {
 	items : Item[];
 	constructor() { 
 
-		this.items = [
-			new Item("Buy pendrives"),
-			new Item("Print tshirts"),
-			new Item("But backpacks"),
-			new Item("Rent the projectors")
-		];
+		this.items = (new TodolistService()).getItems();
 	}
 
   	ngOnInit() {}
