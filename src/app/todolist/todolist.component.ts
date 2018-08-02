@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../model/Item';
-import { TodolistService } from './todolist.service';
+import { AbstractItemService, MockItemService } from './todolist.service';
 
 @Component({
   selector: 'app-todolist',
@@ -10,16 +10,23 @@ import { TodolistService } from './todolist.service';
 export class TodolistComponent implements OnInit {
 
 	items : Item[];
+	service : AbstractItemService;
+
 	constructor() { 
 
-		this.items = (new TodolistService()).getItems();
+		this.service = new MockItemService();
+		this.updateLocalItems();
+	}
+
+	updateLocalItems(){
+		this.service.getItems().then(items => this.items = items);
 	}
 
   	ngOnInit() {}
 
   	onRemove(item){
 
-		this.items = this.items.filter(obj => obj !== item);
+		this.service.removeItem(item).then(() => this.updateLocalItems());
 	}
 
 	onEdit(item){
