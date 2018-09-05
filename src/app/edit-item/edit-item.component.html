@@ -1,0 +1,13 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="editItemForm"> 
+
+    <div class="form-group">
+        <label for="itemName">Item name</label>
+        <input type="text" formControlName="itemName" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save</button>    
+        <a routerLink="/home" class="btn btn-link">Cancel</a>
+    </div>
+
+</form>

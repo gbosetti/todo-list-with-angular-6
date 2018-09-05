@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HttpClientModule }    from '@angular/common/http';
     TodolistComponent,
     NewItemComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ export abstract class AbstractItemService {
 	abstract getItems(): Promise<Item[]>;
 	abstract removeItem(item: Item): Promise<Object>;
 	abstract addItem(item: Item): Promise<Object>;
+	abstract updateItem(item: Item): Promise<Object>;
 }
 
 export class MockItemService extends AbstractItemService {
@@ -56,6 +57,20 @@ export class MockItemService extends AbstractItemService {
 			resolve();
 		});
 	};
+
+	updateItem(item: Item): Promise<Object> {
+		return new Promise((resolve) => {
+
+			this.items.some(storedItem => {
+				if (storedItem.id == item.id){
+				
+					storedItem.name = item.name;
+					return true;
+				}
+			});
+			resolve();
+		});
+	};
 }
 
 export class HttpItemService extends AbstractItemService {
@@ -85,7 +100,10 @@ export class HttpItemService extends AbstractItemService {
 
 	addItem(item: Item): Promise<Object> {
 
-		console.log(item);
 		return this.http.post(this.url + '/todos', item).toPromise();
 	};
+
+	updateItem(item: Item): Promise<Object> {
+		return this.http.put(this.url + '/todos/' + item.id, item).toPromise();
+	}
 }

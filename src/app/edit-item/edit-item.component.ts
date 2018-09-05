@@ -5,13 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 
-
 @Component({
-  selector: 'app-new-item',
-  templateUrl: './new-item.component.html',
-  styleUrls: ['./new-item.component.css']
+  selector: 'app-edit-item',
+  templateUrl: './edit-item.component.html',
+  styleUrls: ['./edit-item.component.css']
 })
-export class NewItemComponent implements OnInit {
+export class EditItemComponent implements OnInit {
 
   	service : AbstractItemService;
   	newItemForm : FormGroup;
@@ -28,12 +27,11 @@ export class NewItemComponent implements OnInit {
 	}
 
 	onSubmit(): void {
-		//console.log('Name:' + this.newItemForm.get('itemName').value);
-		this.addItem(new Item(this.newItemForm.get('itemName').value));
+		this.updateItem(new Item(this.newItemForm.get('itemName').value,this.newItemForm.get('itemId').value));
 	} 
 
-	addItem(item: Item) {
-		this.service.addItem(item)
+	updateItem(item: Item) {
+		this.service.updateItem(item)
 			.then(() => {console.log("routing");this.router.navigateByUrl('/home')})
 			.catch(err => console.log(err));
 	}
