@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../_model/Item';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -68,35 +68,20 @@ export class HttpItemService extends AbstractItemService {
 			});
 		});
 	};
+
+	handleError(error: any): Promise<any> {
+        console.error('Error: ', error);
+        return Promise.reject(error.message);
+    }
 	
 	removeItem(item: Item): Promise<void> {
 
-		return new Promise((resolve) => {
+		return new Promise((resolve, reject) => {
 
-			const httpOptions = {
-			  headers: new HttpHeaders({
-			    'Content-Type':  'application/json',
-			    'Authorization': 'my-auth-token'
-			  })
-			};
-
-			console.log("DELETE: " + this.url + '/todos/' + item.id);
-			this.http.delete(this.url + '/todos/' + item.id, httpOptions);
-			resolve();
-
-			/*
-				const header: HttpHeaders = new HttpHeaders()
-	                .append('Content-Type', 'application/json; charset=UTF-8');
-	                //.append('Authorization', 'Bearer ' + sessionStorage.getItem('accessToken'));
-	            const httpOptions = {
-	                headers: header,
-	                body: { id: item.id }
-	            };
-
-	            this.http.delete<any>(this.url + '/todos', httpOptions);
-
-				resolve();
-			*/
+			this.http.delete(this.url + '/todos/' + item.id)
+			.toPromise()
+				.then(respose => resolve())
+				.catch(respose => {reject(); this.handleError}); 
 		});
 	};
 }
