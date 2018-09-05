@@ -11,7 +11,7 @@ export abstract class AbstractItemService {
 
   	constructor() { }
 	abstract getItems(): Promise<Item[]>;
-	abstract removeItem(item: Item): Promise<void>;
+	abstract removeItem(item: Item): Promise<Object>;
 }
 
 export class MockItemService extends AbstractItemService {
@@ -38,7 +38,7 @@ export class MockItemService extends AbstractItemService {
 		});
 	};
 	
-	removeItem(item: Item): Promise<void> {
+	removeItem(item: Item): Promise<Object> {
 
 		var me = this;
 		return new Promise((resolve) => {
@@ -69,19 +69,8 @@ export class HttpItemService extends AbstractItemService {
 		});
 	};
 
-	handleError(error: any): Promise<any> {
-        console.error('Error: ', error);
-        return Promise.reject(error.message);
-    }
-	
-	removeItem(item: Item): Promise<void> {
+	removeItem(item: Item): Promise<Object> {
 
-		return new Promise((resolve, reject) => {
-
-			this.http.delete(this.url + '/todos/' + item.id)
-			.toPromise()
-				.then(respose => resolve())
-				.catch(respose => {reject(); this.handleError}); 
-		});
+		return this.http.delete(this.url + '/todos/' + item.id).toPromise();
 	};
 }
