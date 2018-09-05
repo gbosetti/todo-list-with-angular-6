@@ -1,5 +1,5 @@
 <h2>Register</h2>
-<form (ngSubmit)="onSubmit()"> 
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm"> 
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" formControlName="username" class="form-control"/>
