@@ -1,29 +1,22 @@
-<div class="content">
+<!-- LIST OF ITEMS -->
+<div class="row justify-content-md-center">
+		<ul class="list-group">
+			<li class="list-group-item list-group-item-action" *ngFor="let item of items" >
+			      <span>{{item.name}}</span>
+			      <span class="badge">{{item.creationDate | date}}</span>
+			      <div class="pull-right">
+			          <button class="btn btn-primary btn-xs fa fa-pencil" (click)="onEdit(item)"></button>
+			          <button class="btn btn-danger btn-xs fa fa-trash-o" (click)="onRemove(item)"></button>
+			      </div>
+			</li>
 
-	<!-- LIST OF ITEMS -->
-	<div class="row justify-content-md-center">
-	    <div class="col-6">
-			<ul class="list-group">
-				<li class="list-group-item list-group-item-action" *ngFor="let item of items" >
-				      <span>{{item.name}}</span>
-				      <span class="badge">{{item.creationDate | date}}</span>
-				      <div class="pull-right">
-				          <button class="btn btn-primary btn-xs fa fa-pencil" (click)="onEdit(item)"></button>
-				          <button class="btn btn-danger btn-xs fa fa-trash-o" (click)="onRemove(item)"></button>
-				      </div>
-				</li>
+		</ul>
+</div>
 
-			</ul>
-		</div>
-	</div>
-
-	<!-- NEW ITEM -->
-	<div class="row justify-content-md-center">
-		<div class="col-6">
-			<nav>
-				<a routerLink="/new-item" class="pull-right">New item</a>
-			</nav>
-		</div>
-	</div>
+<!-- NEW ITEM -->
+<div class="row justify-content-md-center">
+		<nav>
+			<a routerLink="/new-item" class="pull-right">New item</a>
+		</nav>
 </div>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../../model/Item';
-import { AbstractItemService, MockItemService } from './todolist.service';
+import { Item } from '../_model/Item';
+import { AbstractItemService, MockItemService } from '../_services/todolist.service';
 
 @Component({
   selector: 'app-todolist',

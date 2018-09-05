@@ -5,12 +5,16 @@ import { AppComponent } from './app.component';
 import { TodolistComponent } from './todolist/todolist.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { NewItemComponent } from './new-item/new-item.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodolistComponent,
-    NewItemComponent
+    NewItemComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
