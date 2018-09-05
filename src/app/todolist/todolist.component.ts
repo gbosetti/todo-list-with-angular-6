@@ -22,7 +22,7 @@ export class TodolistComponent implements OnInit {
 	}
 
 	updateLocalItems(){
-		console.log(this.service);
+		console.log("Updating items");
 		this.service.getItems().then(items => this.items = items);
 	}
 

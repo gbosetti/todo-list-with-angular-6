@@ -63,7 +63,7 @@ export class HttpItemService extends AbstractItemService {
 
 			this.http.get<Item[]>(this.url + '/todos').subscribe(response => {
 
-			  	var items = response.map((item) => new Item(item.name));
+			  	var items = response.map((item) => new Item(item.name, item.id));
 			  	resolve(items);
 			});
 		});
@@ -71,11 +71,32 @@ export class HttpItemService extends AbstractItemService {
 	
 	removeItem(item: Item): Promise<void> {
 
-		var me = this;
 		return new Promise((resolve) => {
 
-			me.items = me.items.filter(obj => obj !== item);
+			const httpOptions = {
+			  headers: new HttpHeaders({
+			    'Content-Type':  'application/json',
+			    'Authorization': 'my-auth-token'
+			  })
+			};
+
+			console.log("DELETE: " + this.url + '/todos/' + item.id);
+			this.http.delete(this.url + '/todos/' + item.id, httpOptions);
 			resolve();
+
+			/*
+				const header: HttpHeaders = new HttpHeaders()
+	                .append('Content-Type', 'application/json; charset=UTF-8');
+	                //.append('Authorization', 'Bearer ' + sessionStorage.getItem('accessToken'));
+	            const httpOptions = {
+	                headers: header,
+	                body: { id: item.id }
+	            };
+
+	            this.http.delete<any>(this.url + '/todos', httpOptions);
+
+				resolve();
+			*/
 		});
 	};
 }
