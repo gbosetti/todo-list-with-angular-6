@@ -12,6 +12,7 @@ export abstract class AbstractItemService {
   	constructor() { }
 	abstract getItems(): Promise<Item[]>;
 	abstract removeItem(item: Item): Promise<Object>;
+	abstract addItem(item: Item): Promise<Object>;
 }
 
 export class MockItemService extends AbstractItemService {
@@ -47,6 +48,14 @@ export class MockItemService extends AbstractItemService {
 			resolve();
 		});
 	};
+
+	addItem(item: Item): Promise<Object> {
+		return new Promise((resolve) => {
+
+			this.items.push(item);
+			resolve();
+		});
+	};
 }
 
 export class HttpItemService extends AbstractItemService {
@@ -72,5 +81,11 @@ export class HttpItemService extends AbstractItemService {
 	removeItem(item: Item): Promise<Object> {
 
 		return this.http.delete(this.url + '/todos/' + item.id).toPromise();
+	};
+
+	addItem(item: Item): Promise<Object> {
+
+		console.log(item);
+		return this.http.post(this.url + '/todos', item).toPromise();
 	};
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../_model/Item';
 import { AbstractItemService, MockItemService, HttpItemService } from '../_services/todolist.service';
-import {Http, HttpModule } from '@angular/http';
-import {map} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
