@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../_model/Item';
+import { Item } from '../../_model/Item';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import { AbstractItemsService } from '../_services/abstract-items.service';
+import { AbstractItemsService } from './abstract-items.service';
 
 @Injectable({
   providedIn: 'root'

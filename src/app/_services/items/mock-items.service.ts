@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../_model/Item';
-import { AbstractItemsService } from '../_services/abstract-items.service';
+import { Item } from '../../_model/Item';
+import { AbstractItemsService } from './abstract-items.service';
 
 @Injectable({
   providedIn: 'root'

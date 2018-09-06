@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../_model/Item';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AbstractItemsService } from '../_services/abstract-items.service';
-import { HttpItemsService } from '../_services/http-items.service';
-import { MockItemsService } from '../_services/mock-items.service';
+import { AbstractItemsService } from '../_services/items/abstract-items.service';
+import { HttpItemsService } from '../_services/items/http-items.service';
+import { MockItemsService } from '../_services/items/mock-items.service';
 
 @Injectable({
   providedIn: 'root'
