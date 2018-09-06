@@ -9,35 +9,43 @@ import {map} from 'rxjs/operators';
 
 export class ApiService{
 
-	strategy: AbstractItemService;
-	currentItem: Item;
+	itemsStrategy: AbstractItemService;
 
 	constructor(private http: HttpClient) { 
-		this.strategy = new HttpItemService(http); //MockedService
+		
+		this.itemsStrategy = new HttpItemService(http); //MockedService
 	}
+	getCurrentItem(): Item {
+		return this.itemsStrategy.getCurrentItem();
+	};
+	setCurrentItem(item: Item) {
+		this.itemsStrategy.setCurrentItem(item);
+	};
 	getItems(): Promise<Item[]> {
-		return this.strategy.getItems();
+		return this.itemsStrategy.getItems();
 	};
 	removeItem(item: Item): Promise<Object> {
-		return this.strategy.removeItem(item);
+		return this.itemsStrategy.removeItem(item);
 	};
 	addItem(item: Item): Promise<Object>{
-		return this.strategy.addItem(item);
+		return this.itemsStrategy.addItem(item);
 	};
 	updateItem(item: Item): Promise<Object>{
-		return this.strategy.updateItem(item);
+		return this.itemsStrategy.updateItem(item);
 	};
+}
+
+export abstract class AbstractItemService {
+
+	currentItem: Item;
+
+	constructor() { }
 	getCurrentItem(): Item {
 		return this.currentItem;
 	};
 	setCurrentItem(item: Item) {
 		this.currentItem = item;
 	};
-}
-
-export abstract class AbstractItemService {
-
-  	constructor() { }
 	abstract getItems(): Promise<Item[]>;
 	abstract removeItem(item: Item): Promise<Object>;
 	abstract addItem(item: Item): Promise<Object>;
