@@ -7,6 +7,34 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 
+export class ApiService{
+
+	strategy: AbstractItemService;
+	currentItem: Item;
+
+	constructor(private http: HttpClient) { 
+		this.strategy = new HttpItemService(http); //MockedService
+	}
+	getItems(): Promise<Item[]> {
+		return this.strategy.getItems();
+	};
+	removeItem(item: Item): Promise<Object> {
+		return this.strategy.removeItem(item);
+	};
+	addItem(item: Item): Promise<Object>{
+		return this.strategy.addItem(item);
+	};
+	updateItem(item: Item): Promise<Object>{
+		return this.strategy.updateItem(item);
+	};
+	getCurrentItem(): Item {
+		return this.currentItem;
+	};
+	setCurrentItem(item: Item) {
+		this.currentItem = item;
+	};
+}
+
 export abstract class AbstractItemService {
 
   	constructor() { }

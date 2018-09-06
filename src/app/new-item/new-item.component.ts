@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../_model/Item';
-import { AbstractItemService, MockItemService, HttpItemService } from '../_services/todolist.service';
+import { ApiService } from '../_services/todolist.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -13,12 +13,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class NewItemComponent implements OnInit {
 
-  	service : AbstractItemService;
   	newItemForm : FormGroup;
 
-	constructor(private http: HttpClient, private router: Router, private builder: FormBuilder) { /*private service: HttpItemService*/
+	constructor(private service: ApiService, private router: Router, private builder: FormBuilder) { /*private service: HttpItemService*/
 
-		this.service = new HttpItemService(http); //MockItemService();
 		this.newItemForm = builder.group(new Item("")); 
 	}
 
