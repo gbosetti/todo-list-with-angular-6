@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'home', component: TodolistComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'edit-item', component: EditItemComponent }
+  { path: 'edit-item', component: EditItemComponent },
   { path: 'new-item', component: NewItemComponent }
 ];
 

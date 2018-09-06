@@ -10,7 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { EditItemComponent } from './edit-item/edit-item.component';
-import { ApiService } from './_services/todolist.service';
+import { ApiService } from './_services/api.service';
 
 @NgModule({
   declarations: [
