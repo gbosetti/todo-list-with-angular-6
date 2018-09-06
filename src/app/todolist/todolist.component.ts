@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../_model/Item';
 import { AbstractItemService, MockItemService, HttpItemService } from '../_services/todolist.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todolist',
@@ -13,7 +14,7 @@ export class TodolistComponent implements OnInit {
 	items : Item[];
 	service : AbstractItemService;
 
-	constructor(private http: HttpClient) { /*private service: HttpItemService*/
+	constructor(private http: HttpClient, private router: Router) { /*private service: HttpItemService*/
 
 		this.service = new HttpItemService(http); //MockItemService();
 		this.updateLocalItems();
@@ -32,6 +33,6 @@ export class TodolistComponent implements OnInit {
 	}
 
 	onEdit(item){
-		console.log("To do ;)");
+		this.router.navigateByUrl("/edit-item");
 	}
 }

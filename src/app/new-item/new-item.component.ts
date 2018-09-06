@@ -3,7 +3,7 @@ import { Item } from '../_model/Item';
 import { AbstractItemService, MockItemService, HttpItemService } from '../_services/todolist.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -16,20 +16,17 @@ export class NewItemComponent implements OnInit {
   	service : AbstractItemService;
   	newItemForm : FormGroup;
 
-	constructor(private http: HttpClient, private router: Router) { /*private service: HttpItemService*/
+	constructor(private http: HttpClient, private router: Router, private builder: FormBuilder) { /*private service: HttpItemService*/
 
 		this.service = new HttpItemService(http); //MockItemService();
-		this.newItemForm = new FormGroup({
-			itemName: new FormControl()
-		}); 
+		this.newItemForm = builder.group(new Item("")); 
 	}
 
 	ngOnInit() {
 	}
 
 	onSubmit(): void {
-		//console.log('Name:' + this.newItemForm.get('itemName').value);
-		this.addItem(new Item(this.newItemForm.get('itemName').value));
+		this.addItem(this.newItemForm.value);
 	} 
 
 	addItem(item: Item) {
