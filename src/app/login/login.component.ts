@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth/auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,11 @@ export class LoginComponent implements OnInit {
 	isBusy: Boolean = false;
 	hasFailed: Boolean = false;
 	loginForm: FormGroup;
-	API_URL: String = "localhost...";
+	url: string;
 
 	constructor(private fb: FormBuilder, private http: HttpClient, private auth: AuthService, private router: Router) {
+		
+		this.url = environment.backendUrl + "/Users/login";
 		this.loginForm = fb.group({
 		  	username: ['admin', Validators.required],
 		  	password: ['nimda', Validators.required]
@@ -36,7 +39,7 @@ export class LoginComponent implements OnInit {
 		var username = this.loginForm.get('username').value;
 		var password = this.loginForm.get('password').value;
 
-		return this.http.post('http://localhost:3000/Users/login', {
+		return this.http.post(this.url, {
 			"username": username,
 			"password": password
 		}).subscribe(response => {

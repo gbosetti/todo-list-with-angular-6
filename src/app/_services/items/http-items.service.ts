@@ -16,7 +16,7 @@ export class HttpItemsService extends AbstractItemsService {
 
 	constructor(protected http: HttpClient){
 		super();
-		this.url = environment.backendUrl;
+		this.url = environment.backendUrl + "/items";
 	}
 
 	getItems(): Promise<Item[]> {
