@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Http } from '@angular/http';
-import { AuthService } from '../_services/auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../_services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +13,15 @@ export class LoginComponent implements OnInit {
 
 	isBusy: Boolean = false;
 	hasFailed: Boolean = false;
-	form: FormGroup;
+	loginForm: FormGroup;
 	API_URL: String = "localhost...";
 
-	constructor(private fb: FormBuilder, private http: Http, private auth: AuthService, private router: Router) {
-		this.form = fb.group({
-		  	username: ['', Validators.required],
-		  	password: ['', Validators.required]
+	constructor(private fb: FormBuilder, private http: HttpClient, private auth: AuthService, private router: Router) {
+		this.loginForm = fb.group({
+		  	username: ['admin', Validators.required],
+		  	password: ['nimda', Validators.required]
 		});
+		this.auth.logOut();
 	}
 
 	ngOnInit() {
@@ -29,38 +30,26 @@ export class LoginComponent implements OnInit {
 
 	login(){
 
-		// Make sure form values are valid
-		//if (this.frm.invalid) {
-		  //this.showInputErrors = true;
-		  //return;
-		//}
-
 		// Reset status
-		this.isBusy = true;
 		this.hasFailed = false;
 
-		/*const username = this.form.get('username').value;
-		const password = this.form.get('password').value;
+		var username = this.loginForm.get('username').value;
+		var password = this.loginForm.get('password').value;
 
-		this.signIn(username, password).subscribe((response) => {
+		return this.http.post('http://localhost:3000/Users/login', {
+			"username": username,
+			"password": password
+		}).subscribe(response => {
+			console.log(response);
+            this.auth.signIn(response["id"], username);
+			this.router.navigate(['home']);
+        },
+        error => {
+        	console.log(error);
+			this.hasFailed = true;
+        });
 
-				//response.json()
-				this.auth.signIn(response.token, response.name);
-				this.router.navigate(['todos']);
-			},
-			(error) => {
-				this.isBusy = false;
-				this.hasFailed = true;
-			});*/
 	};
-
-	public signIn(username: string, password: string) {
-		return this.http.post(this.API_URL + '/sign-in', {
-			username,
-			password
-		});
-		//.catch(this.handleError);
-	}
 
 	handleError(){
 		console.log("error");

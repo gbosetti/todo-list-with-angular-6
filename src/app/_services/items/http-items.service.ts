@@ -12,10 +12,11 @@ import { environment } from '../../../environments/environment';
 export class HttpItemsService extends AbstractItemsService {
 
 	items: Item[];
-	url: string = environment.backendUrl; // e.g. "http://localhost:3000/items";
+	url: string; // e.g. "http://localhost:3000/items";
 
-	constructor(private http: HttpClient){
+	constructor(protected http: HttpClient){
 		super();
+		this.url = environment.backendUrl;
 	}
 
 	getItems(): Promise<Item[]> {

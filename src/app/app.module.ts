@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { ApiService } from './_services/api.service';
+import { AuthService } from './_services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { ApiService } from './_services/api.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ ApiService ],
+  providers: [ ApiService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
