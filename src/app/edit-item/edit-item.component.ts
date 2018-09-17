@@ -30,7 +30,7 @@ export class EditItemComponent implements OnInit {
 
 	updateItem(item: Item) {
 		this.service.updateItem(item)
-			.then(() => { this.router.navigateByUrl('/home')})
+			.then(() => { this.router.navigateByUrl('/items')})
 			.catch(err => console.log(err));
 	}
 

@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 		}).subscribe(response => {
 			console.log(response);
             this.auth.signIn(response["id"]);
-			this.router.navigate(['home']);
+			this.router.navigate(['items']);
         },
         error => {
         	console.log(error);

@@ -29,7 +29,7 @@ export class NewItemComponent implements OnInit {
 
 	addItem(item: Item) {
 		this.service.addItem(item)
-			.then(() => {console.log("routing");this.router.navigateByUrl('/home')})
+			.then(() => {console.log("routing");this.router.navigateByUrl('/items')})
 			.catch(err => console.log(err));
 	}
 

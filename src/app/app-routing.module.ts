@@ -10,7 +10,7 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', component: TodolistComponent },
+  { path: 'items', component: TodolistComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'edit-item', component: EditItemComponent },
