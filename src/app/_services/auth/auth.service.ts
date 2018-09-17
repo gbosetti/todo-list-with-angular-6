@@ -6,22 +6,19 @@ import { Injectable } from '@angular/core';
 
 export class UserSession {
 
-  public accessToken: string;
-  public name: string;
-
+  accessToken: string;
   constructor() { }
+
+  setToken(token: string){
+  	this.accessToken = token;
+  }
 
   getToken(){
   	return this.accessToken;
   }
 
-  getUsername(){
-  	return this.name;
-  }
-
   public destroy(): void {
     this.accessToken = null;
-    this.name = null;
   }
 }
 
@@ -33,7 +30,7 @@ export class AuthService {
   	}
 
 	public isSignedIn() {
-		return !!this.session.accessToken;
+		return !!this.session.getToken();
 	}
 
 	getCurrentSession(){
@@ -45,14 +42,13 @@ export class AuthService {
 		if(this.session) this.session.destroy();
 	}
 
-	public signIn(accessToken: string, name: string) {
+	public signIn(accessToken: string) {
 
 		return new Promise((resolve, reject) => {
-			if ((!accessToken) || (!name)) {
+			if ((!accessToken))
 		  		return;
-			}
-			this.session.accessToken = accessToken;
-			this.session.name = name;
+
+			this.session.setToken(accessToken);
 			resolve();
 		});
 	}
