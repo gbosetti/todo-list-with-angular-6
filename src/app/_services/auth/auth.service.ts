@@ -29,7 +29,7 @@ export class AuthService {
   		this.session = new UserSession();
   	}
 
-	public isSignedIn() {
+	public isLoggedIn() {
 		return !!this.session.getToken();
 	}
 
